@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Management;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Security.Principal;
 
 namespace Processes
 {
     public class DataAcquisition
     {
         public Form1 form { get; set; }
-        Dictionary<String, List<int[]>> threadsInfo = new Dictionary<String, List<int[]>>();
+        private Dictionary<String, List<int[]>> threadsInfo = new Dictionary<String, List<int[]>>();
         public void UpdateProcesses()
         {
             DataGridView data = form.GetDataGridView();
@@ -25,17 +27,15 @@ namespace Processes
                 foreach (Process process1 in processes)
                 {
                     ProcessThreadCollection threads = process1.Threads;
-                    data.Rows.Add(process1.Id, process1.ProcessName, process1.VirtualMemorySize64/ 8388608 + " МБ", process1.BasePriority, GetProcessOwner(process1.Id), threads.Count);
-                    //Console.WriteLine('\t' + process1.ProcessName + '\t' + process1.Id + '\t' + process1.VirtualMemorySize64 + '\t' + process1.BasePriority + '\t' + GetProcessOwner(process1.Id));
-                    //ProcessThreadCollection threads = process1.Threads;
+                    data.Rows.Add(process1.Id, process1.ProcessName, process1.VirtualMemorySize64/ 8388608 + " МБ", process1.BasePriority, GetProcessOwnerByID(process1.Id), threads.Count);
                     List<int[]> info = new List<int[]>();
                     foreach (ProcessThread tread in threads) info.Add(new int[]{ tread.Id , tread.CurrentPriority});
                     threadsInfo.Add(process1.Id.ToString(), info);
                 }
-                Console.WriteLine(processes.Length);
+                form.SetLabelProcText("(Количество процессов: " + processes.Length.ToString() + ")");
             }
         }
-        private String GetProcessOwner(int processId)
+        /*private String GetProcessOwner(int processId)
         {
             // запрос получения всех процессов связанных с переданным идентификатором processId
             string query = "Select * From Win32_Process Where ProcessID = " + processId;
@@ -55,39 +55,51 @@ namespace Processes
                 return owner;
             }
             return null;
-        }
+        }*/
         public void UpdateThreads()
         {
             DataGridView data = form.GetDataGridView();
             DataGridView data2 = form.GetDataGridView2();
-            if (data.SelectedRows.Count!=0)
+            if (data.SelectedRows.Count != 0 && data.Rows.Count != 1)
             {
-                Console.WriteLine(data.SelectedRows[0].Cells[0].Value);
-                var info = threadsInfo[data.SelectedRows[0].Cells[0].Value.ToString()];
-                data2.Rows.Add(info[0], info[1]);
+                if(data2.Rows.Count!=0) data2.Rows.Clear();
+                String id = data.SelectedRows[0].Cells[0].Value.ToString();
+                var threadinfo = threadsInfo[id];
+                form.SetLabelThreadText(id);
+               foreach(int[] info in threadinfo) data2.Rows.Add(info[0], info[1]);
             }
         }
-        /*private Dictionary<int,String> GetProcessOwners()
+        public static string GetProcessOwnerByID(int processId)
         {
-            Dictionary<int, String> processes = new Dictionary<int, String>();
-            String query = "Select * From Win32_Process";
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
-            ManagementObjectCollection processList = searcher.Get();
-            foreach (ManagementObject result in processList)
+            IntPtr processHandle = IntPtr.Zero;
+            IntPtr tokenHandle = IntPtr.Zero;
+            try
             {
-                var owner = @"Не могу получить владельца процесса";
-                String[] argList = new String[] { String.Empty, String.Empty };
-                int returnVal = 0;
-                    int.TryParse(result.InvokeMethod("GetOwner", argList).ToString(),out returnVal);
+                processHandle = OpenProcess(PROCESS_QUERY_INFORMATION, false, processId);
+                if (processHandle == IntPtr.Zero)
+                    return "NO ACCESS";
 
-                if (returnVal == 0)
+                OpenProcessToken(processHandle, TOKEN_QUERY, out tokenHandle);
+                using (WindowsIdentity wi = new WindowsIdentity(tokenHandle))
                 {
-                    owner = argList[0];
-                    //Console.WriteLine(result["ProcessId"] + "             " + result["Name"] + "  -->  " + argList[1] + "\\" + argList[0]);
+                    string user = wi.Name;
+                    return user.Contains(@"\") ? user.Substring(user.IndexOf(@"\") + 1) : user;
                 }
-                processes.Add(Convert.ToInt32(result["ProcessId"]), owner);
             }
-            return processes;
-        }*/
+            finally
+            {
+                if (tokenHandle != IntPtr.Zero) CloseHandle(tokenHandle);
+                if (processHandle != IntPtr.Zero) CloseHandle(processHandle);
+            }
+        }
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr OpenProcess(uint dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+        [DllImport("advapi32.dll", SetLastError = true)]
+        private static extern bool OpenProcessToken(IntPtr ProcessHandle, uint DesiredAccess, out IntPtr TokenHandle);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool CloseHandle(IntPtr hObject);
+        private const UInt32 PROCESS_QUERY_INFORMATION = 0x0400;
+        private const UInt32 TOKEN_QUERY = 0x0008;
     }
 }
