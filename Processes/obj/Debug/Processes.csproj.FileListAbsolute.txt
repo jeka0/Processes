@@ -18,3 +18,13 @@ D:\Visual studio\Proc\Processes\Processes\obj\Debug\Processes.csproj.GenerateRes
 D:\Visual studio\Proc\Processes\Processes\obj\Debug\Processes.csproj.CoreCompileInputs.cache
 D:\Visual studio\Proc\Processes\Processes\obj\Debug\Processes.exe
 D:\Visual studio\Proc\Processes\Processes\obj\Debug\Processes.pdb
+D:\Visual studio\Processes\Processes\Processes\bin\Debug\Processes.exe.config
+D:\Visual studio\Processes\Processes\Processes\bin\Debug\Processes.exe
+D:\Visual studio\Processes\Processes\Processes\bin\Debug\Processes.pdb
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.csproj.AssemblyReference.cache
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.Form1.resources
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.Properties.Resources.resources
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.csproj.GenerateResource.cache
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.csproj.CoreCompileInputs.cache
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.exe
+D:\Visual studio\Processes\Processes\Processes\obj\Debug\Processes.pdb

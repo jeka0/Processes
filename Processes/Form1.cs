@@ -27,6 +27,7 @@ namespace Processes
         {
             Show();
             presenter.UpdateProcesses();
+            presenter.Update();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -34,6 +35,7 @@ namespace Processes
             /* Thread thread = new Thread(presenter.UpdateProcesses);
              thread.Start();*/
             presenter.UpdateProcesses();
+            presenter.Update();
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)

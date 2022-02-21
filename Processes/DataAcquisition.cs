@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
@@ -13,10 +14,10 @@ namespace Processes
     {
         public Form1 form { get; set; }
         private Dictionary<String, List<int[]>> threadsInfo = new Dictionary<String, List<int[]>>();
+        private List<MyProcess> myProcesses = new List<MyProcess>();
         public void UpdateProcesses()
         {
-            DataGridView data = form.GetDataGridView();
-            if(data.Rows.Count!=1) data.Rows.Clear();
+            myProcesses.Clear();
             threadsInfo.Clear();
             using (Process process = new Process())
             {
@@ -24,13 +25,22 @@ namespace Processes
                 foreach (Process process1 in processes)
                 {
                     ProcessThreadCollection threads = process1.Threads;
-                    data.Rows.Add(process1.Id, process1.ProcessName, process1.PrivateMemorySize64/(1024*1024) + " МБ", process1.BasePriority, GetProcessOwnerByID(process1), threads.Count);
+                    myProcesses.Add(new MyProcess(process1.Id, process1.ProcessName, process1.PrivateMemorySize64 / (1024 * 1024) + " МБ", process1.BasePriority, GetProcessOwnerByID(process1), threads.Count));
                     List<int[]> info = new List<int[]>();
                     foreach (ProcessThread tread in threads) info.Add(new int[]{ tread.Id , tread.CurrentPriority});
                     threadsInfo.Add(process1.Id.ToString(), info);
                 }
                 form.SetLabelProcText("(Количество процессов: " + processes.Length.ToString() + ")");
             }
+        }
+        public void Update()
+        {
+            DataGridView data = form.GetDataGridView();
+           BindingSource bindingSource1 = new BindingSource();
+            bindingSource1.DataSource = myProcesses;
+            data.DataSource = bindingSource1;
+            data.ClearSelection();
+            Console.WriteLine(data.RowCount);
         }
         public void UpdateThreads()
         {
