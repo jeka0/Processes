@@ -30,6 +30,12 @@ namespace Processes
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProcessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Memory = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfThreads = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.ThreadId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ThreadPriority = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,12 +44,6 @@ namespace Processes
             this.label2 = new System.Windows.Forms.Label();
             this.LabThread = new System.Windows.Forms.Label();
             this.LabeProc = new System.Windows.Forms.Label();
-            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProcessName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Memory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Priority = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NumberOfThreads = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -62,106 +62,17 @@ namespace Processes
             this.Priority,
             this.Username,
             this.NumberOfThreads});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 50);
+            this.dataGridView1.Location = new System.Drawing.Point(16, 62);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(717, 354);
+            this.dataGridView1.Size = new System.Drawing.Size(956, 436);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeColumns = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ThreadId,
-            this.ThreadPriority});
-            this.dataGridView2.Location = new System.Drawing.Point(735, 50);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(254, 354);
-            this.dataGridView2.TabIndex = 1;
-            // 
-            // ThreadId
-            // 
-            this.ThreadId.HeaderText = "Id";
-            this.ThreadId.MinimumWidth = 6;
-            this.ThreadId.Name = "ThreadId";
-            this.ThreadId.ReadOnly = true;
-            this.ThreadId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ThreadId.Width = 125;
-            // 
-            // ThreadPriority
-            // 
-            this.ThreadPriority.HeaderText = "приоритет потока ";
-            this.ThreadPriority.MinimumWidth = 6;
-            this.ThreadPriority.Name = "ThreadPriority";
-            this.ThreadPriority.ReadOnly = true;
-            this.ThreadPriority.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ThreadPriority.Width = 125;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 410);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(98, 38);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(92, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Процессы:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(731, 15);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Потоки прцесса:";
-            // 
-            // LabThread
-            // 
-            this.LabThread.AutoSize = true;
-            this.LabThread.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabThread.Location = new System.Drawing.Point(861, 15);
-            this.LabThread.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LabThread.Name = "LabThread";
-            this.LabThread.Size = new System.Drawing.Size(18, 20);
-            this.LabThread.TabIndex = 5;
-            this.LabThread.Text = "0";
-            // 
-            // LabeProc
-            // 
-            this.LabeProc.AutoSize = true;
-            this.LabeProc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabeProc.Location = new System.Drawing.Point(193, 15);
-            this.LabeProc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LabeProc.Name = "LabeProc";
-            this.LabeProc.Size = new System.Drawing.Size(18, 20);
-            this.LabeProc.TabIndex = 6;
-            this.LabeProc.Text = "0";
             // 
             // Id
             // 
@@ -229,11 +140,100 @@ namespace Processes
             this.NumberOfThreads.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.NumberOfThreads.Width = 125;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AllowUserToAddRows = false;
+            this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeColumns = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ThreadId,
+            this.ThreadPriority});
+            this.dataGridView2.Location = new System.Drawing.Point(980, 62);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.ReadOnly = true;
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView2.Size = new System.Drawing.Size(339, 436);
+            this.dataGridView2.TabIndex = 1;
+            // 
+            // ThreadId
+            // 
+            this.ThreadId.HeaderText = "Id";
+            this.ThreadId.MinimumWidth = 6;
+            this.ThreadId.Name = "ThreadId";
+            this.ThreadId.ReadOnly = true;
+            this.ThreadId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ThreadId.Width = 125;
+            // 
+            // ThreadPriority
+            // 
+            this.ThreadPriority.HeaderText = "приоритет потока ";
+            this.ThreadPriority.MinimumWidth = 6;
+            this.ThreadPriority.Name = "ThreadPriority";
+            this.ThreadPriority.ReadOnly = true;
+            this.ThreadPriority.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ThreadPriority.Width = 125;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(16, 505);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(131, 47);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Обновить";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(123, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(111, 25);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Процессы:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(975, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(167, 25);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Потоки прцесса:";
+            // 
+            // LabThread
+            // 
+            this.LabThread.AutoSize = true;
+            this.LabThread.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabThread.Location = new System.Drawing.Point(1148, 18);
+            this.LabThread.Name = "LabThread";
+            this.LabThread.Size = new System.Drawing.Size(23, 25);
+            this.LabThread.TabIndex = 5;
+            this.LabThread.Text = "0";
+            // 
+            // LabeProc
+            // 
+            this.LabeProc.AutoSize = true;
+            this.LabeProc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LabeProc.Location = new System.Drawing.Point(257, 18);
+            this.LabeProc.Name = "LabeProc";
+            this.LabeProc.Size = new System.Drawing.Size(23, 25);
+            this.LabeProc.TabIndex = 6;
+            this.LabeProc.Text = "0";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(999, 450);
+            this.ClientSize = new System.Drawing.Size(1332, 554);
             this.Controls.Add(this.LabeProc);
             this.Controls.Add(this.LabThread);
             this.Controls.Add(this.label2);
@@ -241,6 +241,7 @@ namespace Processes
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);

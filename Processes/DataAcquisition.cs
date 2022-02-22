@@ -15,7 +15,7 @@ namespace Processes
         public Form1 form { get; set; }
         private Dictionary<String, List<int[]>> threadsInfo = new Dictionary<String, List<int[]>>();
         private List<MyProcess> myProcesses = new List<MyProcess>();
-        public void UpdateProcesses()
+        public void UpdateProcessesInfo()
         {
             myProcesses.Clear();
             threadsInfo.Clear();
@@ -40,7 +40,6 @@ namespace Processes
             bindingSource1.DataSource = myProcesses;
             data.DataSource = bindingSource1;
             data.ClearSelection();
-            Console.WriteLine(data.RowCount);
         }
         public void UpdateThreads()
         {

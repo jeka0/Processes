@@ -26,15 +26,13 @@ namespace Processes
         private void Form1_Load(object sender, EventArgs e)
         {
             Show();
-            presenter.UpdateProcesses();
+            presenter.UpdateProcessesInfo();
             presenter.Update();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            /* Thread thread = new Thread(presenter.UpdateProcesses);
-             thread.Start();*/
-            presenter.UpdateProcesses();
+            presenter.UpdateProcessesInfo();
             presenter.Update();
         }
 
